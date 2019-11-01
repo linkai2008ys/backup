@@ -1,0 +1,12 @@
+1. UIActivityIndicatorView style change:
+UIActivityIndicatorViewStyleGray
+UIActivityIndicatorViewStyleWhite
+UIActivityIndicatorViewStyleWhiteLarge
+=>
+UIActivityIndicatorViewStyleMedium
+UIActivityIndicatorViewStyleLarge
+
+
+2. Get keyWindow:
+UIApplication.shared.keyWindow 
+=> UIApplication.shared.windows[0]
