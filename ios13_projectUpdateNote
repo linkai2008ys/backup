@@ -10,3 +10,21 @@ UIActivityIndicatorViewStyleLarge
 2. Get keyWindow:
 UIApplication.shared.keyWindow 
 => UIApplication.shared.windows[0]
+
+3. presentViewController default modalPresentationStyle change:
+UIModalPresentationFullScreen => UIModalPresentationAutomatic(new, often means UIModalPresentationPageSheet)
+
+4.bluetooth apply (info.plist):
+NSBluetoothPeripheralUsageDescription => NSBluetoothAlwaysUsageDescription
+
+5. UIWebview => WKWebView(WebKit.framework)
+
+6.prohibit kvc access:
+if #available(iOS 13.0, *) {
+    let arrStr = NSMutableAttributedString(string: field.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray3, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
+    field.attributedPlaceholder = arrStr
+} else {
+    field.setValue(UIColor.systemGray3, forKeyPath: "_placeholderLabel.textColor")
+    field.setValue(UIFont.systemFont(ofSize: 15), forKeyPath:"_placeholderLabel.font")
+}
+
