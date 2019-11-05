@@ -28,3 +28,33 @@ if #available(iOS 13.0, *) {
     field.setValue(UIFont.systemFont(ofSize: 15), forKeyPath:"_placeholderLabel.font")
 }
 
+if #available(iOS 13.0, *) {
+      let searchTextField =  searchBar.searchTextField
+} else {
+      let searchTextField = searchBar.value(forKey: "_searchField")
+}
+
+@implementation UISearchBar (SearchTextField)
+
+- (UITextField *)atu_searchTextField{
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+        //ide sdk version check
+#ifdef __IPHONE_13_0
+        return self.searchTextField;
+#else
+        return [self valueForKey:@"searchTextField"];
+#endif
+    }
+    return [self valueForKey:@"_searchField"];
+}
+
+@end
+
+//* UISearchBarBackground remove handle:
+if (@available(iOS 13.0, *)) {
+        [[_searchBar.subviews objectAtIndex:0].subviews objectAtIndex:0].hidden = YES;
+} else {
+        [[[_searchBar.subviews objectAtIndex:0].subviews objectAtIndex:0]removeFromSuperview];
+}
+
+
