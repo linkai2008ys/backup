@@ -11,10 +11,16 @@ UIActivityIndicatorViewStyleLarge
 UIApplication.shared.keyWindow 
 => UIApplication.shared.windows[0]
 
+//force all-view use legy light mode,ignore dark mode setting
+if #available(iOS 13, *) {
+	window?.overrideUserInterfaceStyle = .light
+	//window?.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
+}
+
 3. presentViewController default modalPresentationStyle change:
 UIModalPresentationFullScreen => UIModalPresentationAutomatic(new, often means UIModalPresentationPageSheet)
 
-override presentViewController: UIViewController+LL_Utils
+override presentViewController: UIViewController+LL_Utils (https://github.com/HDB-Li/UIViewController)
 
 4.bluetooth apply (info.plist):
 NSBluetoothPeripheralUsageDescription => NSBluetoothAlwaysUsageDescription
@@ -30,10 +36,12 @@ if #available(iOS 13.0, *) {
     field.setValue(UIFont.systemFont(ofSize: 15), forKeyPath:"_placeholderLabel.font")
 }
 
+let searchTextField:UITextField!
 if #available(iOS 13.0, *) {
-      let searchTextField =  searchBar.searchTextField
+	searchTextField =  searchBar.searchTextField
+	//searchField = self.value(forKey: "searchTextField") as! UITextField
 } else {
-      let searchTextField = searchBar.value(forKey: "_searchField")
+	searchTextField = searchBar.value(forKey: "_searchField")
 }
 
 @implementation UISearchBar (SearchTextField)
@@ -53,7 +61,7 @@ if #available(iOS 13.0, *) {
 @end
 
 //* UISearchBarBackground remove handle:
-if (@available(iOS 13.0, *)) {
+if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
         [[_searchBar.subviews objectAtIndex:0].subviews objectAtIndex:0].hidden = YES;
 } else {
         [[[_searchBar.subviews objectAtIndex:0].subviews objectAtIndex:0]removeFromSuperview];
