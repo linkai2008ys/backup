@@ -25,7 +25,7 @@ override presentViewController: UIViewController+LL_Utils (https://github.com/HD
 4.bluetooth apply (info.plist):
 NSBluetoothPeripheralUsageDescription => NSBluetoothAlwaysUsageDescription
 
-5. UIWebview => WKWebView(WebKit.framework)
+5. UIWebView => WKWebView(WebKit.framework)
 
 6.prohibit kvc access:
 if #available(iOS 13.0, *) {
